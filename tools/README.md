@@ -9,9 +9,10 @@
 
 ```bash
 # Sender side:
-iperf -s -u -i 5 2>&1 | tee [trace log]
+# (interval should be fine-grained: at least 1 second)
+iperf -s -u -i 1 2>&1 | tee [trace log]
 # Receiver side:
-iperf -c -u \[ip\]
+iperf -c [sender's ip] -u
 ```
 
 2. Format `trace.log` into .json format trace input to simulator.

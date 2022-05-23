@@ -39,7 +39,7 @@ def log_to_linear(value):
 
 class GymEnv:
     def __init__(self, step_time=60):
-        self.gym_env = None     
+        self.gym_env = None
         self.step_time = step_time
         trace_dir = os.path.join(os.path.dirname(__file__), "traces")
         self.trace_set = glob.glob(f'{trace_dir}/**/*.json', recursive=True)
@@ -89,6 +89,7 @@ class GymEnv:
         states.append(liner_to_log(latest_prediction))
 
         # calculate reward
-        reward = states[0] - states[1] - states[2]
+        # print(f'thp {states[0]} delay {states[1]} loss {states[2]}')
+        reward = states[0] - 0.2 * states[2]
 
         return states, reward, done, {}

@@ -1,0 +1,68 @@
+{
+    "type": "video",
+    "downlink": {},
+    "uplink": {
+        "trace_pattern": [
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.124,
+                "loss": 0.0031
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.162,
+                "loss": 0.009300000000000001
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.163,
+                "loss": 0.015
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.149,
+                "loss": 0.021
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.166,
+                "loss": 0.027000000000000003
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.167,
+                "loss": 0.033
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.164,
+                "loss": 0.038
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.152,
+                "loss": 0.044000000000000004
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95500.0,
+                "jitter": 0.152,
+                "loss": 0.053
+            },
+            {
+                "duration": 1.0,
+                "capacity": 95700.0,
+                "jitter": 0.17,
+                "loss": 0.055
+            }
+        ]
+    }
+}

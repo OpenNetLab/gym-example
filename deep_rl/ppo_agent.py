@@ -2,9 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import torch
-import numpy as np
 import time
-from torch import nn
+
 from .actor_critic import ActorCritic
 
 
@@ -17,7 +16,7 @@ class PPO:
         self.ppo_epoch = ppo_epoch
         self.use_gae = use_gae
 
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cpu")
         self.policy = ActorCritic(state_dim, action_dim, exploration_param, self.device).to(self.device)
         self.optimizer = torch.optim.Adam(self.policy.parameters(), lr=lr, betas=betas)
 
@@ -48,21 +47,22 @@ class PPO:
         old_states = torch.squeeze(torch.stack(storage.states).to(self.device), 1).detach()
         old_actions = torch.squeeze(torch.stack(storage.actions).to(self.device), 1).detach()
         old_action_logprobs = torch.squeeze(torch.stack(storage.logprobs), 1).to(self.device).detach()
-        old_returns = torch.squeeze(torch.stack(storage.returns), 1).to(self.device).detach()        
+        old_returns = torch.squeeze(torch.stack(storage.returns), 1).to(self.device).detach()
 
-        for t in range(self.ppo_epoch):
+        for _ in range(self.ppo_epoch):
             logprobs, state_values, dist_entropy = self.policy.evaluate(old_states, old_actions)
             ratios = torch.exp(logprobs - old_action_logprobs)
 
+            # Surrogate loss
             surr1 = ratios * advantages
             surr2 = torch.clamp(ratios, 1-self.ppo_clip, 1+self.ppo_clip) * advantages
-            policy_loss = -torch.min(surr1, surr2).mean()
-            value_loss = 0.5 * (state_values - old_returns).pow(2).mean()
-            loss = policy_loss + value_loss
+            policy_loss = -torch.min(surr1, surr2)
+            value_loss = 0.5 * (state_values - old_returns).pow(2).mean() # mean for MSE (Mean Squared Error)
+            loss = policy_loss + value_loss - 0.01 * dist_entropy
 
             self.optimizer.zero_grad()
-            loss.backward()
-            self.optimizer.step()          
+            loss.mean().backward()
+            self.optimizer.step()
             episode_policy_loss += policy_loss.detach()
             episode_value_loss += value_loss.detach()
 

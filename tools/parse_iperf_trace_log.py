@@ -3,21 +3,21 @@ import re
 import sys
 
 
-def calc_capacity_bps(num, unit):
-  capacity_bps = 0
+def calc_capacity_kbps(num, unit):
+  capacity_kbps = 0
 
-  if 'Bits/sec' in unit:
-    capacity_bps = num
-  elif 'Kbits/sec' in unit:
-    capacity_bps = num * 1000
+  if 'Kbits/sec' in unit:
+    capacity_kbps = num
   elif 'Mbits/sec' in unit:
-    capacity_bps = num * 1000000
-  elif 'Gbits/sec' in unit:
-    capacity_bps = num * 1000000000
+    capacity_kbps = num * 1000
+  elif 'KBytes/sec' in unit:
+    capacity_kbps = num * 8
+  elif 'MBytes/sec' in unit:
+    capacity_kbps = num * 8 * 1000
   else:
     print('Unknown unit for bandwidth')
 
-  return capacity_bps
+  return capacity_kbps
 
 
 def calc_jitter_ms(num, unit):
@@ -64,7 +64,7 @@ def main():
         jitter = split_others[5]
 
         split_loss = line.split('(')
-        loss_rate = int(split_loss[1].split('%'[0])[0])
+        loss_rate = float(split_loss[1].split('%'[0])[0]) * 0.01
 
         # Duration of each interval is uniform
         if duration == 0.0:
@@ -76,16 +76,18 @@ def main():
         # Capacity
         num = float(capacity.split(' ')[0])
         unit = capacity.split(' ')[1]
-        capacity_bps = calc_capacity_bps(num, unit)
+        capacity_kbps = calc_capacity_kbps(num, unit)
 
         # Jitter
         num = float(jitter.split(' ')[0])
         unit = jitter.split(' ')[1]
         jitter_ms = calc_jitter_ms(num, unit)
 
+        print(f'duration {duration} capacity (Kbps) {capacity_kbps} jitter (ms) {jitter_ms} loss rate {loss_rate}')
+
         # Add network statistics during current interval
         interval_dict['duration'] = duration
-        interval_dict['capacity'] = capacity_bps
+        interval_dict['capacity'] = capacity_kbps
         interval_dict['jitter'] = jitter_ms
         interval_dict['loss'] = loss_rate
         trace_pattern.append(interval_dict)
@@ -93,7 +95,6 @@ def main():
   # Save the trace in a json format
   with open(f'{trace_input_name}', 'w') as trace_input:
       trace_input.write(json.dumps(trace_dict, indent = 4))
-
 
 if __name__ == '__main__':
   main()

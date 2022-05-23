@@ -4,62 +4,62 @@
     "uplink": {
         "trace_pattern": [
             {
-                "duration": 1.0,
-                "capacity": 1060000.0,
+                "duration": 1000.0,
+                "capacity": 1060.0,
                 "jitter": 0.014,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.08,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.017,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.061,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.083,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1060000.0,
+                "duration": 1000.0,
+                "capacity": 1060.0,
                 "jitter": 0.013,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.011,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.096,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.027,
                 "loss": 0
             },
             {
-                "duration": 1.0,
-                "capacity": 1050000.0,
+                "duration": 1000.0,
+                "capacity": 1050.0,
                 "jitter": 0.021,
                 "loss": 0
             }

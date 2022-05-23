@@ -4,3 +4,4 @@ __pycache__
 *.pth
 *.swp
 !pretrained_model.pth
+data/*
