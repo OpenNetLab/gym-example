@@ -35,3 +35,14 @@ Episode 4        Average policy loss, value loss, reward -0.0002334891452391077,
 
 ```
 which means this example has readied in your environment. And you can find your model under the folder `data`.
+
+## License
+
+Original project-owned source code is licensed under the [BSD-3-Clause License](LICENSE).
+Third-party code and dependencies, including the `gym` submodule, remain under their
+respective licenses and are not relicensed by this license.
+
+Model weights (including `data/pretrained_model.pth`), datasets, and traces
+(including `traces/`) are excluded from this code license. This license does not
+grant rights to those assets; any use requires separate authorization or an
+applicable independent license.
